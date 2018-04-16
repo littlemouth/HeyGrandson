@@ -1,5 +1,7 @@
 package dfst.com.heygrandson.defender;
 
+import java.util.Random;
+
 import dfst.com.heygrandson.basic.DrawElement;
 import dfst.com.heygrandson.basic.Vector;
 import dfst.com.heygrandson.bullet.Bullet;
@@ -14,24 +16,34 @@ public abstract class BasicDefender extends DrawElement implements Defender {
     protected Enemy enemy;
     protected float radius;
     protected float effectiveDistance;
+    private Random random = new Random();
+
+    @Override
+    public float getEffectiveDistance() {
+        return effectiveDistance;
+    }
 
     @Override
     public void captureEnemy() {
         if (enemy == null) {
             float distance = 0;
             Enemy enemyTemp = null;
-            for (Enemy e : Processor.enemies) {
-                float len = VectorUtil.distance(vector, e.getVector());
-                if (len <= effectiveDistance) {
-                    if (distance == 0) {
-                        distance = len;
-                        enemyTemp = e;
-                    } else {
-                        if (len < distance) {
+            synchronized (Processor.enemies) {
+                for (Enemy e : Processor.enemies) {
+                    if (!e.isAlive()) continue;
+                    float len = VectorUtil.distance(vector, e.getVector());
+                    if (len <= effectiveDistance) {
+                        if (distance == 0) {
+                            distance = len;
                             enemyTemp = e;
+                        } else {
+                            if (len < distance) {
+                                enemyTemp = e;
+                            }
                         }
                     }
                 }
+
             }
             if (enemyTemp != null)
                 enemy = enemyTemp;
@@ -51,8 +63,11 @@ public abstract class BasicDefender extends DrawElement implements Defender {
                     try {
                         if (enemy != null && enemy.isAlive()) {
                             Bullet bullet = createBullet();
-                            Processor.bullets.add(bullet);
+                            synchronized (Processor.bullets) {
+                                Processor.bullets.add(bullet);
+                            }
                         }
+
                         sleep(500);
                     } catch (InterruptedException e) {
                         e.printStackTrace();

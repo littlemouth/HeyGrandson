@@ -8,4 +8,13 @@ import dfst.com.heygrandson.util.VectorUtil;
 public class DrawElement {
     protected Vector vector;
     protected Vector direction = VectorUtil.randomDirection();
+
+    public void refreshDirection(float x, float y) {
+        direction.x = x;
+        direction.y = y;
+    }
+
+    public Vector getDirection() {
+        return  direction;
+    }
 }

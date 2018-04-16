@@ -16,6 +16,6 @@ public class App extends Application {
         super.onCreate();
         UnitLength = DensityUtil.dip2px(this, 1);
         HealthMarginTop = UnitLength * 2.5f;
-        HealthHeight = UnitLength * 5;
+        HealthHeight = UnitLength * 4;
     }
 }

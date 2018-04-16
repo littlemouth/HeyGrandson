@@ -10,4 +10,8 @@ public interface Enemy extends Element {
     boolean isAlive();
     float getEffectiveDistance();
     double getDistance();
+    void move();
+    int getStep();
+    void setStep(int step);
+    float getSpeed();
 }

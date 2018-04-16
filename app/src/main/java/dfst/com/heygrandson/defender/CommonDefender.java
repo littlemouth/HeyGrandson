@@ -8,7 +8,6 @@ import dfst.com.heygrandson.basic.App;
 import dfst.com.heygrandson.basic.Vector;
 import dfst.com.heygrandson.bullet.Bullet;
 import dfst.com.heygrandson.bullet.CommonBullet;
-import dfst.com.heygrandson.util.VectorUtil;
 
 /**
  * Created by yanfei on 2016-09-29.
@@ -41,7 +40,7 @@ public class CommonDefender extends BasicDefender {
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(1);
         paint.setColor(Color.GRAY);
-        canvas.drawCircle(vector.x, vector.y, effectiveDistance, paint);
+        //canvas.drawCircle(vector.x, vector.y, effectiveDistance, paint);
         reset();
     }
 }

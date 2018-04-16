@@ -9,7 +9,7 @@ import dfst.com.heygrandson.ui.BattleField;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button button;
+    private Button startBtn, scopeBtn;
     private BattleField battleField;
 
     @Override
@@ -17,14 +17,32 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        button = (Button) findViewById(R.id.button);
+        startBtn = (Button) findViewById(R.id.startBtn);
+        scopeBtn = (Button) findViewById(R.id.scopeBtn);
         battleField = (BattleField) findViewById(R.id.battle_field);
 
-        button.setOnClickListener(new View.OnClickListener() {
+        startBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 battleField.play();
+                startBtn.setEnabled(false);
             }
         });
+        scopeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (battleField.scopeVisiable()) {
+                    battleField.scope(false);
+                } else  {
+                    battleField.scope(true);
+                }
+            }
+        });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        battleField.release();
     }
 }

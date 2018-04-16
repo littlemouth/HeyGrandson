@@ -2,6 +2,7 @@ package dfst.com.heygrandson.enemy;
 
 import dfst.com.heygrandson.basic.DrawElement;
 import dfst.com.heygrandson.basic.Vector;
+import dfst.com.heygrandson.pass.Pass;
 
 /**
  * Created by yanfei on 2016-09-26.
@@ -11,6 +12,12 @@ public abstract class BasicEnemy extends DrawElement implements Enemy{
     protected int currentHealth;
     protected float speed;
     protected double distance;
+    protected Pass pass;
+    protected int step = 1;
+
+    public BasicEnemy(Pass pass) {
+        this.pass = pass;
+    }
 
     @Override
     public boolean isAlive() {
@@ -36,4 +43,10 @@ public abstract class BasicEnemy extends DrawElement implements Enemy{
     public Vector getVector() {
         return vector;
     }
+
+    public int getStep() {return step;}
+
+    public float getSpeed() {return speed;}
+
+    public void setStep(int step) {this.step = step;}
 }

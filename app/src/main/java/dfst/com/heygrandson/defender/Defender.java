@@ -8,4 +8,5 @@ import dfst.com.heygrandson.basic.Element;
 public interface Defender extends Element{
     void captureEnemy();
     void fire();
+    float getEffectiveDistance();
 }

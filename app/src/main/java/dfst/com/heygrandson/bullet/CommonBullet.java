@@ -17,7 +17,7 @@ public class CommonBullet extends BasicBullet {
     public CommonBullet(Enemy enemy, Vector vector) {
         this.enemy = enemy;
         this.vector = new Vector(vector.x, vector.y);
-        damage = 40;
+        damage = 10;
         speed = App.UnitLength * 3;
         radius = App.UnitLength * 4;
     }
